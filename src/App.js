@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
 function App() {
+  const name = "리액트";
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <div className="one">
+          <ul>
+            <li>카카오톡</li>
+            <li>카톡 안녕가이드</li>
+            <li>카톡설명서</li>
+            <li>다운로드</li>
+          </ul>
+        </div>
+        <div className="two">
+          <div className="box1">
+            <h2>카카오톡 쇼핑</h2>
+            <p>
+              ABCDEFGHIABCDEFGHI
+              <br />
+              ABCDEFGHIABCDEFGHI
+              <br />
+              ABCDEFGHIABCDEFGHI
+              <br />
+            </p>
+          </div>
+          <div className="box2"></div>
+        </div>
+      </div>
+    </>
   );
 }
 
