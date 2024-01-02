@@ -6,7 +6,7 @@ export default function Q() {
   const [userpasswd, setPasswd] = useState("");
   const [confirmPasswd, setConfirmPasswd] = useState("");
   const [usephone, setPhone] = useState("");
-  const [showUserData, setShowUserData] = useState(false);
+  const [ showUserData, setShowUserData] = useState(false);
   const [passwordMismatch, setPasswordMismatch] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
   const [emailError, setEmailError] = useState(false);
