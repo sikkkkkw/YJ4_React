@@ -1,10 +1,10 @@
-// import IterationSample from "./IterationSample";
-import Marvel from "./Marvel";
+import IterationSample from "./IterationSample";
+// import Marvel from "./Marvel";
 
 function App() {
   return (
     <div>
-      <Marvel />
+      <IterationSample />
     </div>
   );
 }
