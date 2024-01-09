@@ -2,11 +2,13 @@
 // import Info from "./info";
 // import Password from "./Password";
 // import Login from "./Login";
-import Q from "./Q";
+// import Q2 from "./Q2";
+import UseEffect from "./useEffect";
+
 function App() {
   return (
     <div>
-      <Q />
+      <UseEffect />
     </div>
   );
 }
