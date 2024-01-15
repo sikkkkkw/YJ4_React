@@ -7,7 +7,7 @@ export default function TrendingPage() {
   const [lists, setLists] = useState([]);
   useEffect(() => {
     const url =
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+      "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1";
     const options = {
       method: "GET",
       headers: {
@@ -36,7 +36,7 @@ export default function TrendingPage() {
 
   return (
     <div className="w-full flex justify-center bg-[#1B354A]">
-      <div className="w-[1300px] h-[400px] pt-8 ">
+      <div className="w-[1300px] h-[450px] pt-8 ">
         {/* 타이틀 */}
         <h2 className="px-4 py-2 font-semibold text-[24px]">Trending</h2>
         {/* 리스트 */}

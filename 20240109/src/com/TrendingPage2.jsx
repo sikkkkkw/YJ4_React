@@ -14,7 +14,7 @@ export default function TrendingPage2() {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/trending/${activeTab}/day?language=en-US`;
+    const url = `https://api.themoviedb.org/3/trending/${activeTab}/day?language=ko-KR`;
 
     const options = {
       method: "GET",
@@ -40,7 +40,7 @@ export default function TrendingPage2() {
 
   return (
     <div className="w-full flex justify-center bg-[#1B354A]">
-      <div className="w-[1300px]">
+      <div className="w-[1300px] ">
         {/* 타이틀 및 탭바 */}
         <div className="flex items-center justify-between px-4 pt-8">
           <h2 className="text-2xl font-semibold">Trending</h2>
@@ -78,7 +78,7 @@ export default function TrendingPage2() {
                       : `https://image.tmdb.org/t/p/w500${item.profile_path}`
                   }
                   alt={item.title || item.name}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-[400px] object-cover"
                 />
                 <div className="p-4">
                   <h3 className="text-lg font-semibold overflow-hidden whitespace-nowrap">
@@ -93,7 +93,7 @@ export default function TrendingPage2() {
           <div className="flex justify-center mt-8">
             <button
               onClick={handleLoadMore}
-              className="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition"
+              className="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition mb-3"
             >
               Load More
             </button>

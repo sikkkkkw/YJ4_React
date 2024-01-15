@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom"; // Assuming you're using react-router for routing
-import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
+import Layout from "../com/Layout";
+import { useEffect, useState } from "react";
+import changeRuntime from "../lib/changeRuntime";
+import CircularProgress from "../com/CircularProgress";
 
-const Details = () => {
-  const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState(null);
-
+export default function Details() {
+  const { movieId } = useParams(); //값 가져오는 함수
+  const [movieDetails, setData] = useState();
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
-
+    const url = `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`;
     const options = {
       method: "GET",
       headers: {
@@ -21,49 +21,71 @@ const Details = () => {
     fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
-        setMovieDetails(json);
+        console.log(json);
+        setData(json);
       })
       .catch((err) => console.error("error:" + err));
   }, [movieId]);
-
-  if (!movieDetails) {
-    return (
-      <div className="w-full py-32 flex justify-center">
-        <div className="text-3xl font-bold">Movies</div>
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full flex justify-center bg-[#1B354A]">
-      <div className="w-[1300px] ">
-        <div className="p-4">
-          <motion.div
-            layoutId={`bubble-${movieDetails.id}`}
-            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-            className="relative overflow-hidden rounded-md bg-gray-300 mb-4"
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-              alt={movieDetails.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-2xl font-semibold mb-2">
-                {movieDetails.title}
-              </h3>
-              <p className="text-gray-400">{movieDetails.release_date}</p>
-              <p className="my-4">{movieDetails.overview}</p>
-              {/* Display other details as needed */}
-              <Link to="/" className="text-blue-500 hover:underline">
-                Back to Trending
-              </Link>
+    <Layout>
+      <div className="relative w-full h-[500px] flex justify-center">
+        {/* backdrop_path 이미지 */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <img
+            className="w-full h-full object-cover"
+            src={`https://image.tmdb.org/t/p/original${movieDetails?.backdrop_path}`}
+            alt="backimage"
+          />
+        </div>
+        {/* 필터기능 div */}
+        <div className="absolute top-0 left-0 w-full h-full bg-gray-900/90 flex justify-center">
+          <div className="w-[1300px] h-full flex">
+            {/* 왼쪽: 이미지 */}
+            <div className="w-1/4 h-full flex items-center">
+              <div className="w-[80%] h-[80%]">
+                <img
+                  className="w-full h-full object-cover"
+                  src={`https://image.tmdb.org/t/p/original${movieDetails?.poster_path}`}
+                  alt="mainimage"
+                />
+              </div>
             </div>
-          </motion.div>
+            {/* 오른쪽: 설명 */}
+            <div className="w-3/4 h-full flex flex-col justify-center text-white">
+              {/* 제목 */}
+              <div className="flex space-x-2">
+                <h1 className="font-bold text-3xl">{movieDetails?.title}</h1>
+                <h2 className="text-2xl">
+                  ({movieDetails?.release_date.split("-")[0]})
+                </h2>
+              </div>
+              {/* 장르 러닝타임 */}
+              <div className="flex space-x-2">
+                {/* 개봉일 */}
+                <span>{movieDetails?.release_date.replaceAll("-", "/")}</span>
+                {/* 구분자 */}
+                <span>•</span>
+                {/* 장르 */}
+                <span className="space-x-2">
+                  {movieDetails?.genres?.map((genre) => (
+                    <span key={genre.name}>{genre.name}</span>
+                  ))}
+                </span>
+                {/* 구분자 */}
+                <span>•</span>
+                {/* 러닝타임 */}
+                <span>{changeRuntime(movieDetails?.runtime)}</span>
+              </div>
+              {/* favorite */}
+              <div>
+                <CircularProgress
+                  rate={Math.floor(movieDetails?.vote_average * 10)}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
-};
-
-export default Details;
+}
