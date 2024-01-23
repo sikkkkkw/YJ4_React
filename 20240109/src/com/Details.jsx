@@ -28,7 +28,7 @@ export default function Details() {
   }, [movieId]);
   return (
     <Layout>
-      <div className="relative w-full h-[500px] flex justify-center">
+      <div className="relative w-full h-[700px] flex justify-center">
         {/* backdrop_path 이미지 */}
         <div className="absolute top-0 left-0 w-full h-full">
           <img
@@ -44,7 +44,7 @@ export default function Details() {
             <div className="w-1/4 h-full flex items-center">
               <div className="w-[80%] h-[80%]">
                 <img
-                  className="w-full h-full object-cover"
+                  className="w-full h-[500px] object-cover"
                   src={`https://image.tmdb.org/t/p/original${movieDetails?.poster_path}`}
                   alt="mainimage"
                 />
@@ -56,13 +56,13 @@ export default function Details() {
               <div className="flex space-x-2">
                 <h1 className="font-bold text-3xl">{movieDetails?.title}</h1>
                 <h2 className="text-2xl">
-                  ({movieDetails?.release_date.split("-")[0]})
+                  ({movieDetails?.release_date?.split("-")[0]})
                 </h2>
               </div>
               {/* 장르 러닝타임 */}
               <div className="flex space-x-2">
                 {/* 개봉일 */}
-                <span>{movieDetails?.release_date.replaceAll("-", "/")}</span>
+                <span>{movieDetails?.release_date?.replaceAll("-", "/")}</span>
                 {/* 구분자 */}
                 <span>•</span>
                 {/* 장르 */}

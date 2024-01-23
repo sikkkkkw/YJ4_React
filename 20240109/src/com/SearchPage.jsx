@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchPage() {
+  const navigate = useNavigate();
+  const [keyword, setkeyword] = useState();
+  const handClick = () => {
+    navigate(`/search?keyword=${keyword}`);
+  };
+  const handleChange = (e) => {
+    setkeyword(e.target.value);
+  };
   return (
     <div className="w-full flex justify-center bg-[#1B354A]">
       {/* 이미지 div */}
@@ -15,13 +24,15 @@ export default function SearchPage() {
             </h2>
           </div>
           {/* 인풋박스 */}
-          <div className="relative">
+          <div className="relative flex">
             <input
+              onChange={handleChange}
               className="w-full py-3 px-4 text-gray-900 outline-none rounded-3xl"
               type="text"
               placeholder="Search for movie, Tv show, person..."
             />
             <button
+              onClick={handClick}
               className="absolute right-0 py-3 px-6 rounded-3xl font-semibold hover:text-black"
               style={{
                 backgroundImage:
